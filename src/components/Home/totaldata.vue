@@ -2,7 +2,7 @@
     <div class="totaldata">
        <div class="total-section">
           <h1>Total Lending</h1>
-          <h2>$999999</h2>
+          <h2>${{totalLendAmount}}</h2>
        </div>
        <div class="table-section">
            <table>
@@ -20,20 +20,25 @@
                </tr>
                <tr>
                    <td>Collateral-Token</td>
-                   <td>MATIC</td>
+                   <td>ETH</td>
                </tr>
            </table>
        </div>
     </div>
 </template>
 <script lang="ts">
+import store from "@/store";
 import { Options , Vue} from "vue-class-component";
 
 @Options({
 
 })
 export default class Totaldata extends Vue{
-
+    
+    public get totalLendAmount() : number {
+        return (store.state.totallendamount)*0.01
+    }
+    
 }
 </script>
 <style>
@@ -70,5 +75,12 @@ td {
 }
 table{
     width: 100%;
+}
+@media screen and (max-width: 840px){
+    .totaldata{
+        width: 100%;
+        margin: 0;
+        margin-top: 30px;
+    }
 }
 </style>

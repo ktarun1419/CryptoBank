@@ -11,6 +11,8 @@ export default createStore({
     currentIndex:0,
     totalData:[''],
     marketData:false,
+    currentPrice:0,
+    totallendamount:0,
   },
   getters: {
   },
@@ -41,6 +43,12 @@ export default createStore({
     },
     set_marketData(state,payload){
       state.marketData=payload
+    },
+    set_currentPrice(state,payload){
+      state.currentPrice=payload;
+    },
+    set_totalLendAmount(state,payload){
+      state.totallendamount=payload/1000000000000000000
     }
   },
   actions: {

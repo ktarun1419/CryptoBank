@@ -1,22 +1,25 @@
 <template>
     <div class="show">
-        <div class="lendpool" v-for="i in amount" :key="i">
+        <p ></p>
+        <div class="lendpool" v-for="i in (parseInt(current))" :key="i">
               <table>
             <tr>
+                 <td>Index</td>
                 <td>
                     Amount
                 </td>
                 <td>
-                  <button class="viewdata-button">View Data</button>
+                  <button class="viewdata-button" @click="payback(i-1)">Payback</button>
                 </td>
             </tr>
             <tr>
+                      <td>{{i-1}}</td>
                 <td>
-                    {{i}}
+                    ${{this.amount[i-1]/100000000000000000000}}
                 </td>
                
                 <td>
-                   <button class="borrow-button" @click="borrow">Borrow</button>
+                   <button class="borrow-button" @click="borrow(i-1)">Borrow</button>
                 </td>
             </tr>
         </table>
@@ -33,23 +36,32 @@ data(){
 
     return{
         isMarket:false,
-        amount:[]
+        amount:[],
+        current:store.state.currentIndex
     }
 },methods:{
-    borrow(){
+    async borrow(index){
+         transactions.prototype.getLatestprice();
+        let price=await store.state.currentPrice
+        
+        let amt=this.amount[index];
+        let amt1=parseInt((amt*0.01)/price)
+        console.log("final-amt",amt1)
+        transactions.prototype.borrow(amt1,index)
+    },
+    async payback(index){
+        transactions.prototype.payback(index)
     }
 },
-beforeCreate(){
-     let total=transactions.prototype.totalData();
-       total.then((result)=>{
+beforeMount(){
+    let pool=[]
            console.log(store.state.totalData)
-           
           for (let index = 1; index < store.state.totalData.length; index++) {
-              this.amount.push(store.state.totalData[index])
-              
+              pool.push(store.state.totalData[index])    
           }
+          this.amount=pool
           console.log(this.amount)
-       })}
+       }
 })
 export default class Lendpool extends Vue{
 

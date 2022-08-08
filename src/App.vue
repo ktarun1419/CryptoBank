@@ -16,11 +16,20 @@ import transactions from "@/mixins/transactions";
   components:{
     Topbar
   },
+  data(){
+    return{
+      getdata:[]
+    }
+  },
  beforeCreate(){
    let data=datasetup.prototype.provider();
    data.then((result)=>{
      if (result){
-       transactions.prototype.totalData()
+       transactions.prototype.getLatestprice();
+       transactions.prototype.gettotalLendAmount()
+       let total=transactions.prototype.totalData()
+       this.getdata=total;
+       console.log(this.getdata[0])
      }
    })
    
@@ -40,7 +49,8 @@ export default class App extends Vue {
   position: absolute;
   left: 0;
   top: 0;
-  height: 1000px;
+  height: auto;
+  min-height: 1000px;
   width: 100%;
 }
 

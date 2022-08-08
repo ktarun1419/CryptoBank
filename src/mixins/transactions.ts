@@ -24,7 +24,7 @@ export default class transaction extends Vue {
             from: store.state.walletAddress,
             to: bankAddress,
             data: bankinstance.methods.lend(amount, months).encodeABI(),
-            gas: web3.utils.toHex(0.00020189 * 1e9)
+            // gas: web3.utils.toHex(0.00020189 * 1e9)
         }
         let approve = web3.eth.sendTransaction(txApprove)
         console.log(approve)
@@ -49,6 +49,7 @@ index:number     */
     public borrow(amount: string | number, index: string | number) {
         let web3 = new Web3(store.state.provider);
         let bankAddress = bank[0].contract.address;
+        
         let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
         let txBorrow: object = {
             from: store.state.walletAddress,
@@ -97,7 +98,7 @@ index:number|string     */
             from: store.state.walletAddress,
             to: bankAddress,
             data: bankinstance.methods.withdraw(index).encodeABI(),
-            gas: web3.utils.toHex(0.00020189 * 1e9)
+            // gas: web3.utils.toHex(0.00020189 * 1e9)
         }
         let stake = web3.eth.sendTransaction(txPayback)
         stake.then((result) => {
@@ -115,7 +116,7 @@ index:number|string     */
         let web3 = await new Web3(store.state.provider);
         let bankAddress = bank[0].contract.address;
         let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
-        let values: any = bankinstance.methods.currentIndex().call()
+        let values: any = bankinstance.methods.getCurrentIndex().call()
         values.then((result: number) => {
             console.log(result)
             store.commit("set_currentIndex", result)
@@ -132,25 +133,14 @@ index:number|string     */
     /**
      * totalData
      */
-    public totalData() {
+    public totalData():number[] {
+        let final:number[]=[]
         async function getdata() {
             transaction.prototype.getCurrentIndex()
             let web3 = new Web3(store.state.provider);
             let bankAddress = bank[0].contract.address;
             let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
             let current = await store.state.currentIndex
-            type MyType={
-                index:number[],
-                amount:number[],
-                lenderaddress:string[],
-                isBorrowed:boolean[],
-            }
-           let data:MyType={
-               index:[],
-               amount:[],
-               lenderaddress:[],
-               isBorrowed:[]
-           }
            let amount:number[]=[0]
            
             console.log(current)
@@ -158,7 +148,7 @@ index:number|string     */
                 let values: any = bankinstance.methods.totallenddata(index).call();
                
                 values.then((result) => {
-                    amount.push(result.amount)
+                    final.push(result.amount)
                     store.commit("set_totalData",result.amount)
                 }).catch((e) => {
                     console.log(e)
@@ -167,6 +157,45 @@ index:number|string     */
             store.commit("set_marketData",true);
             return amount
         }
-        return getdata();
+         getdata();
+         return final
+    }
+    public getLatestprice() {
+        let final:number=0
+        async function current() {
+        let web3 = await new Web3(store.state.provider);
+        let bankAddress = bank[0].contract.address;
+        let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
+        let values: any = bankinstance.methods.getLatestPrice().call()
+        values.then((result: number) => {
+            final= result
+            console.log(result)
+            store.commit("set_currentPrice",result)
+        }
+        ).catch((e) => {
+            console.log(e)
+        })
+        } 
+        current();
+        return final
+    }
+    public gettotalLendAmount() {
+        let final:number=0
+        async function current() {
+        let web3 = await new Web3(store.state.provider);
+        let bankAddress = bank[0].contract.address;
+        let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
+        let values: any = bankinstance.methods.totalLendamount().call()
+        values.then((result: number) => {
+            final= result
+            console.log(result)
+            store.commit("set_totalLendAmount",result)
+        }
+        ).catch((e) => {
+            console.log(e)
+        })
+        } 
+        current();
+        return final
     }
 }

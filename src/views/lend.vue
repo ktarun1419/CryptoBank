@@ -98,7 +98,7 @@ export default class Lend extends Vue {
   border: #99a3ba solid 1px;
   border-radius: 10px;
   width: 100%;
-  margin-top: 150px;
+  margin-top: 50px;
   background-color: rgba(35, 33, 45, 255);
 }
 .max-button-stake {
@@ -121,11 +121,11 @@ export default class Lend extends Vue {
   font-size: 25px;
   border-style: hidden;
   border: #99a3ba solid 1px;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 10px 10px 10px;
   background: transparent;
   color: #99a3ba;
-  width: 72%;
-  float: left;
+  width: 90%;
+ 
 }
 
 .input-text {
@@ -150,7 +150,7 @@ export default class Lend extends Vue {
   left: 0;
   width: 100%; /* Full width */
   height: 80%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  overflow: scroll; /* Enable scroll if needed */
 }
 
 /* Modal Content/Box */
@@ -168,5 +168,10 @@ export default class Lend extends Vue {
 .heading {
   color: rgb(199, 164, 199);
   font-family: "Inter var", sans-serif;
+}
+@media screen and (max-width: 840px){
+  .modal-stake-content{
+    width: 90%;
+  }
 }
 </style>

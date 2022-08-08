@@ -15,7 +15,6 @@
 import { Options , Vue} from "vue-class-component";
 
 @Options({
-
 })
 export default class Lending extends Vue{
 
@@ -43,5 +42,11 @@ export default class Lending extends Vue{
 }
 .lending-content{
     margin-top: 50px;
+}@media screen and (max-width: 840px){
+    .lending{
+        width: 100%;
+        margin: 0;
+        margin-top: 40px;
+    }
 }
 </style>
