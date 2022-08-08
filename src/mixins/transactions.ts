@@ -112,13 +112,16 @@ index:number|string     */
      * getdata
      */
     public getCurrentIndex() {
+        let final=0
         async function current() {
         let web3 = await new Web3(store.state.provider);
         let bankAddress = bank[0].contract.address;
         let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
         let values: any = bankinstance.methods.getCurrentIndex().call()
         values.then((result: number) => {
-            console.log(result)
+            final=result
+            console.log(final)
+
             store.commit("set_currentIndex", result)
         }
         ).catch((e) => {
@@ -126,6 +129,7 @@ index:number|string     */
         })
         } 
         current();
+        return final
     }
     /**
      * name
@@ -136,11 +140,11 @@ index:number|string     */
     public totalData():number[] {
         let final:number[]=[]
         async function getdata() {
-            transaction.prototype.getCurrentIndex()
+            
             let web3 = new Web3(store.state.provider);
             let bankAddress = bank[0].contract.address;
             let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
-            let current = await store.state.currentIndex
+            let current = await transaction.prototype.getCurrentIndex()
            let amount:number[]=[0]
            
             console.log(current)
