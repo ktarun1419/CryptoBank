@@ -1,19 +1,6 @@
 # cryptobank
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Frontend is complete
+in the video section we told yoy that frontend is not complete because due to extension of deadline we have completed our frontend and we are attaching the live link
