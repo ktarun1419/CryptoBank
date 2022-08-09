@@ -148,7 +148,7 @@ index:number|string     */
            let amount:number[]=[0]
            
             console.log(current)
-            for (let index = 0; index <= current+1; index++) {
+            for (let index = 0; index <= current+2; index++) {
                 let values: any = bankinstance.methods.totallenddata(index).call();
                
                 values.then((result) => {
