@@ -15,7 +15,9 @@
           <li>
             <a>{{getChain}}</a>
           </li>
-          
+          <li>
+            <a>{{getbalance}} </a>
+          </li>
         </ul>
       </nav>
     </div>

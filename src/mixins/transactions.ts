@@ -119,17 +119,19 @@ index:number|string     */
         let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
         let values: any = bankinstance.methods.getCurrentIndex().call()
         values.then((result: number) => {
-            final=result
-            console.log(final)
+           final=result
+           console.log(result)
+           transaction.prototype.totalData(result);
+           store.commit("set_currentIndex", result)
+            return result
 
-            store.commit("set_currentIndex", result)
+            
         }
         ).catch((e) => {
             console.log(e)
         })
         } 
-        current();
-        return final
+        return current()
     }
     /**
      * name
@@ -137,18 +139,17 @@ index:number|string     */
     /**
      * totalData
      */
-    public totalData():number[] {
+    public totalData(current:number):number[] {
         let final:number[]=[]
         async function getdata() {
             
             let web3 = new Web3(store.state.provider);
             let bankAddress = bank[0].contract.address;
             let bankinstance = new web3.eth.Contract(bank[0].contract.abi, bankAddress);
-            let current = await transaction.prototype.getCurrentIndex()
            let amount:number[]=[0]
            
-            console.log(current)
-            for (let index = 0; index <= current+2; index++) {
+            console.log('currentindex',current)
+            for (let index = 0; index <= current; index++) {
                 let values: any = bankinstance.methods.totallenddata(index).call();
                
                 values.then((result) => {

@@ -27,10 +27,11 @@ import transactions from "@/mixins/transactions";
      if (result){
        transactions.prototype.getLatestprice();
        transactions.prototype.gettotalLendAmount()
-       let total=transactions.prototype.totalData()
-       this.getdata=total;
-       console.log(this.getdata[0])
-     }
+       transactions.prototype.getCurrentIndex()
+    //    let total=transactions.prototype.totalData()
+    //    this.getdata=total;
+    //    console.log(this.getdata[0])
+      }
    })
    
  }

@@ -36,7 +36,7 @@ import { Options , Vue} from "vue-class-component";
 export default class Totaldata extends Vue{
     
     public get totalLendAmount() : number {
-        return (store.state.totallendamount)*0.01
+        return (store.state.totallendamount*0.01)
     }
     
 }
