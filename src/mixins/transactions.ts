@@ -153,8 +153,9 @@ index:number|string     */
                 let values: any = bankinstance.methods.totallenddata(index).call();
                
                 values.then((result) => {
-                    final.push(result.amount)
+                    final.push(result.isBorrowed)
                     store.commit("set_totalData",result.amount)
+                    store.commit("set_isborrowed",result.isBorrowed)
                 }).catch((e) => {
                     console.log(e)
                 })
@@ -163,6 +164,7 @@ index:number|string     */
             return amount
         }
          getdata();
+         console.log(final)
          return final
     }
     public getLatestprice() {

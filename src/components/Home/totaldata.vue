@@ -1,7 +1,7 @@
 <template>
     <div class="totaldata">
        <div class="total-section">
-          <h1>Total Lending</h1>
+          <h1>Lending Pool</h1>
           <h2>${{totalLendAmount}}</h2>
        </div>
        <div class="table-section">

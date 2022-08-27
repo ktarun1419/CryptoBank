@@ -8,6 +8,7 @@
                 <td>
                     Amount
                 </td>
+                <td>Borrowed</td>
                 <td>
                   <button class="viewdata-button" @click="payback(i-1)">Payback</button>
                 </td>
@@ -17,7 +18,7 @@
                 <td>
                     ${{this.amount[i-1]/100000000000000000000}}
                 </td>
-               
+               <td>{{this.isborrow[i-1]}}</td>
                 <td>
                    <button class="borrow-button" @click="borrow(i-1)">Borrow</button>
                 </td>
@@ -37,7 +38,8 @@ data(){
     return{
         isMarket:false,
         amount:[],
-        current:store.state.currentIndex
+        current:store.state.currentIndex,
+        isborrow:[]
     }
 },methods:{
     async borrow(index){
@@ -55,12 +57,15 @@ data(){
 },
 beforeMount(){
     let pool=[]
+    let borrow=[]
            console.log(store.state.totalData)
           for (let index = 1; index < store.state.totalData.length; index++) {
-              pool.push(store.state.totalData[index])    
+              pool.push(store.state.totalData[index])
+              borrow.push(store.state.isborrowed[index])    
           }
           this.amount=pool
-          console.log(this.amount)
+          this.isborrow=borrow
+          console.log(this.isborrow)
        }
 })
 export default class Lendpool extends Vue{

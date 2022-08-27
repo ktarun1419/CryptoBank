@@ -13,6 +13,7 @@ export default createStore({
     marketData:false,
     currentPrice:0,
     totallendamount:0,
+    isborrowed:['']
   },
   getters: {
   },
@@ -49,6 +50,9 @@ export default createStore({
     },
     set_totalLendAmount(state,payload){
       state.totallendamount=payload/1000000000000000000
+    },
+    set_isborrowed(state,payload){
+      state.isborrowed.push(payload)
     }
   },
   actions: {
